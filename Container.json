@@ -1,0 +1,15 @@
+{
+  "image": "container image, required",
+  "name": "container name",
+  "command": ["list of string"],
+  "cpuset_cpus": "a set of CPUs, format: 0-3",
+  "detach": true,
+  "network": "name of the network this container will be connected to at creation time",
+  "ports": {"2222/tcp": 3333},
+  "volumes": {
+    "/host/path": {
+      "bind": "/mounted/container/path",
+      "mode": "rw"
+    }
+  }
+}

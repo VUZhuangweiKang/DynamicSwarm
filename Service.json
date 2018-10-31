@@ -1,0 +1,23 @@
+{
+  "image": "the image name to use for containers, required",
+  "name": "service name",
+  "command": ["list of string"],
+  "args": ["Arguments to the command"],
+  "endpoint_spec": {
+    "mode": "vip(default)/dnsrr",
+    "ports": "published_port:target_port"
+  },
+  "mode": {
+    "service_mode": "replicated/global",
+    "replicas": 3
+  },
+  "constraints": ["node.id==node_id", "node.hostname!=undesired host name"],
+  "mounts": ["source:target:option, example: /host_path:/container_path:rw"],
+  "networks": ["List of network names or IDs to attach the service to(this only can be used in vip mode)"],
+  "resources": {
+    "cpu_limit": "(int) – CPU limit in units of 10^9 CPU shares",
+    "mem_limit": "(int) – Memory limit in Bytes."
+  },
+  "tty": true,
+  "open_stdin": true
+}

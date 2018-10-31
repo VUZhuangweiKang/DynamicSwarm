@@ -1,12 +1,9 @@
-#!/usr/bin/env /usr/local/bin/python
-# encoding: utf-8
-# Author: Zhuangwei Kang
-
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import socket
 import re
 import logging
-import cpuinfo
 import psutil
 
 
