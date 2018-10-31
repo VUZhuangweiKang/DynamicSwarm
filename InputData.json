@@ -1,0 +1,27 @@
+{
+  "job_name": "job1533585500968-1533585495",
+  "job_info": {
+    "network": {
+      "name": "RESTfulSwarmNetwork",
+      "driver": "overlay",
+      "subnet": "129.59.0.0/16"
+    },
+    "tasks": {
+      "job1533585500968-1533585495_task1": {
+        "container_name": "job1533585500968-1533585495_task1",
+        "node": "",
+        "image": "image_name",
+        "detach": true,
+        "command": "",
+        "req_cores": 2,
+        "cpuset_cpus": "",
+        "mem_limit": "10m",
+        "ports": {"3000/tcp": 3000},
+        "volumes": {},
+        "environment": {},
+        "status": "Ready"
+      }
+    }
+  },
+  "status": "Ready"
+ }
