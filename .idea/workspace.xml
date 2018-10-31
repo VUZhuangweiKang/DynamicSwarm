@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2518ff9-03e4-495c-b36f-140bbf1cff4b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Container.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Controller.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DockerAPI.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Service.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HAProxyManager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GlobalManager.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/InputData.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Messenger.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SystemEnv.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Worker.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utl.py" beforeDir="false" afterPath="$PROJECT_DIR$/utl.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,7 +14,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Controller.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Controller.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Controller.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="132">
@@ -39,10 +29,22 @@
       <file leaf-file-name="DockerAPI.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DockerAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-388">
-              <caret line="142" column="41" selection-start-line="142" selection-start-column="41" selection-end-line="142" selection-end-column="41" />
+            <state relative-caret-position="-256">
+              <caret line="61" column="17" lean-forward="true" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HAProxyManager.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/HAProxyManager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="786">
+              <caret line="97" column="12" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="12" />
+              <folding>
+                <element signature="e#44#53#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -98,6 +100,7 @@
         <option value="$PROJECT_DIR$/Service.json" />
         <option value="$PROJECT_DIR$/DockerAPI.py" />
         <option value="$PROJECT_DIR$/Controller.py" />
+        <option value="$PROJECT_DIR$/HAProxyManager.py" />
       </list>
     </option>
   </component>
@@ -164,6 +167,14 @@
       <option name="presentableId" value="Default" />
       <updated>1540789272996</updated>
     </task>
+    <task id="LOCAL-00001" summary="update">
+      <created>1540968594702</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1540968594702</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -212,6 +223,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -336,6 +351,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#43#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Service.json">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -345,20 +370,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DockerAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-388">
-          <caret line="142" column="41" selection-start-line="142" selection-start-column="41" selection-end-line="142" selection-end-column="41" />
+        <state relative-caret-position="-256">
+          <caret line="61" column="17" lean-forward="true" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Controller.py">
+    <entry file="file://$PROJECT_DIR$/HAProxyManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="786">
+          <caret line="97" column="12" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="12" />
           <folding>
-            <element signature="e#43#53#0" expanded="true" />
+            <element signature="e#44#53#0" expanded="true" />
           </folding>
         </state>
       </provider>
