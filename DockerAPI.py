@@ -155,6 +155,7 @@ class SwarmMaster(BaseDocker):
             ipam_config = None
         network = self.client.networks.create(name=name,
                                                 driver='overlay',
+                                                attachable=True,
                                                 check_duplicate=check_duplicate,
                                                 ipam=ipam_config)
         self.logger.info('Created network %s' % network.id)
