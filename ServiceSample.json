@@ -7,7 +7,7 @@
     "ports": "4000:4000"
   },
   "mode": {
-    "service_mode": "replicated/global",
+    "service_mode": "replicated",
     "replicas": 3
   },
   "networks": ["DynamicSwarmNetwork"],
