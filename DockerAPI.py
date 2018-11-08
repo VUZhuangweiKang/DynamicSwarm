@@ -9,7 +9,7 @@ import utl
 class BaseDocker(object):
     def __init__(self):
         self.__client = docker.from_env()
-        self.__logger = utl.get_logger('DockerLogger', 'DockerOperation.log')
+        self.logger = utl.get_logger('DockerLogger', 'DockerOperation.log')
 
     def pull_image(self, repository, tag):
         """
@@ -36,10 +36,10 @@ class BaseDocker(object):
             result = self.__client.containers.create(image, command, container_info)
             # if detach is specified, result is a container object, or it's STDOUT/STDERR
             if container_info['detach']:
-                self.__logger.info('Created container', result.id)
+                self.logger.info('Created container', result.id)
             return result
         except Exception as ex:
-            self.__logger.error(ex)
+            self.logger.error(ex)
 
 
 class SwarmMaster(BaseDocker):
@@ -58,11 +58,11 @@ class SwarmMaster(BaseDocker):
             result = self.__client.swarm.init(advertise_addr=advertise_addr)
             self.__inited_flag = True
             if result:
-                self.__logger.info('Init Docker Swarm environment.')
+                self.logger.info('Init Docker Swarm environment.')
             else:
-                self.__logger.error('Something wrong while initializing Docker Swarm environment.')
+                self.logger.error('Something wrong while initializing Docker Swarm environment.')
         except Exception as ex:
-            self.__logger.error(ex)
+            self.logger.error(ex)
 
     def create_service(self, service_info):
         """
@@ -110,11 +110,11 @@ class SwarmMaster(BaseDocker):
 
             service = self.__client.services.create(image, command, service_info)
 
-            self.__logger.info('Created service:', service.id)
+            self.logger.info('Created service:', service.id)
 
             return service
         except Exception as ex:
-            self.__logger.error(ex)
+            self.logger.error(ex)
 
     def rm_service(self, service_id):
         assert type(service_id) is str
@@ -123,7 +123,7 @@ class SwarmMaster(BaseDocker):
                 if s.id == service_id:
                     s.remove()
         except Exception as ex:
-            self.__logger.error(ex)
+            self.logger.error(ex)
 
     def list_services(self):
         """
@@ -157,7 +157,7 @@ class SwarmMaster(BaseDocker):
                                                 driver='overlay',
                                                 check_duplicate=check_duplicate,
                                                 ipam=ipam_config)
-        self.__logger.info('Created network', network.id)
+        self.logger.info('Created network', network.id)
         self.__networks.append(network)
         return network
 
@@ -183,7 +183,7 @@ class SwarmWorker(BaseDocker):
         assert not self.__joined_flag
         assert self.__client.swarm.join(remote_addrs=[remote_addr], join_token=join_token)
         self.__joined_flag = True
-        self.__logger.info('Joined cluster as a worker node.')
+        self.logger.info('Joined cluster as a worker node.')
 
     def leave(self, force=True):
         """
@@ -192,4 +192,4 @@ class SwarmWorker(BaseDocker):
         :return:
         """
         assert self.__client.swarm.leave(force)
-        self.__logger.info('Left swarm cluster.')
+        self.logger.info('Left swarm cluster.')
