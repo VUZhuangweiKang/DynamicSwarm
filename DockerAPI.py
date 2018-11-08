@@ -8,7 +8,7 @@ import utl
 
 class BaseDocker(object):
     def __init__(self):
-        self.__client = docker.from_env()
+        self.client = docker.from_env()
         self.logger = utl.get_logger('DockerLogger', 'DockerOperation.log')
 
     def pull_image(self, repository, tag):
@@ -18,7 +18,7 @@ class BaseDocker(object):
         :param tag:
         :return:
         """
-        return self.__client.images.pull(repository, tag)
+        return self.client.images.pull(repository, tag)
 
     def create_container(self, container_info):
         assert type(container_info) is dict
@@ -33,7 +33,7 @@ class BaseDocker(object):
         del container_info['image']
 
         try:
-            result = self.__client.containers.create(image, command, container_info)
+            result = self.client.containers.create(image, command, container_info)
             # if detach is specified, result is a container object, or it's STDOUT/STDERR
             if container_info['detach']:
                 self.logger.info('Created container', result.id)
@@ -55,7 +55,7 @@ class SwarmMaster(BaseDocker):
         :return:
         """
         try:
-            result = self.__client.swarm.init(advertise_addr=advertise_addr)
+            result = self.client.swarm.init(advertise_addr=advertise_addr)
             self.__inited_flag = True
             if result:
                 self.logger.info('Init Docker Swarm environment.')
@@ -108,7 +108,7 @@ class SwarmMaster(BaseDocker):
                     cpu_limit = service_info['resources']['cpu_limit']
                 service_info['resources'] = docker.types.Resources(cpu_limit=cpu_limit, mem_limit=mem_limit)
 
-            service = self.__client.services.create(image, command, service_info)
+            service = self.client.services.create(image, command, service_info)
 
             self.logger.info('Created service:', service.id)
 
@@ -129,7 +129,7 @@ class SwarmMaster(BaseDocker):
         """
         :return: a list of services
         """
-        return self.__client.services.list()
+        return self.client.services.list()
 
     def get_join_token(self):
         """
@@ -153,7 +153,7 @@ class SwarmMaster(BaseDocker):
             ipam_config = docker.types.IPAMConfig(pool_configs=[ipam_pool])
         else:
             ipam_config = None
-        network = self.__client.networks.create(name=name,
+        network = self.client.networks.create(name=name,
                                                 driver='overlay',
                                                 check_duplicate=check_duplicate,
                                                 ipam=ipam_config)
@@ -165,7 +165,7 @@ class SwarmMaster(BaseDocker):
         """
         :return: a list of worker node objects
         """
-        return self.__client.nodes.list(filters={'role': 'manager'})
+        return self.client.nodes.list(filters={'role': 'manager'})
 
 
 class SwarmWorker(BaseDocker):
@@ -181,7 +181,7 @@ class SwarmWorker(BaseDocker):
         :return:
         """
         assert not self.__joined_flag
-        assert self.__client.swarm.join(remote_addrs=[remote_addr], join_token=join_token)
+        assert self.client.swarm.join(remote_addrs=[remote_addr], join_token=join_token)
         self.__joined_flag = True
         self.logger.info('Joined cluster as a worker node.')
 
@@ -191,5 +191,5 @@ class SwarmWorker(BaseDocker):
         :param force:
         :return:
         """
-        assert self.__client.swarm.leave(force)
+        assert self.client.swarm.leave(force)
         self.logger.info('Left swarm cluster.')
