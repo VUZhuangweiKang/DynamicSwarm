@@ -55,7 +55,7 @@ class SwarmMaster(BaseDocker):
         :return:
         """
         try:
-            result = self.client.swarm.init(advertise_addr=advertise_addr)
+            self.client.swarm.init(advertise_addr=advertise_addr)
             self.__inited_flag = True
             self.logger.info('Init Docker Swarm environment.')
         except Exception as ex:
@@ -133,7 +133,7 @@ class SwarmMaster(BaseDocker):
         Get join token of a Swarm cluster
         :return: remote address, join_token
         """
-        join_token = os.popen('sudo docker swarm join-token worker | grep docker', 'r').read()
+        join_token = os.popen('sudo docker swarm join-token worker', 'r').read()
         print('Join token is here: %s' % join_token)
         return join_token
 
@@ -152,10 +152,10 @@ class SwarmMaster(BaseDocker):
         else:
             ipam_config = None
         network = self.client.networks.create(name=name,
-                                                driver='overlay',
-                                                attachable=True,
-                                                check_duplicate=check_duplicate,
-                                                ipam=ipam_config)
+                                              driver='overlay',
+                                              attachable=True,
+                                              check_duplicate=check_duplicate,
+                                              ipam=ipam_config)
         self.logger.info('Created network %s' % network.id)
         self.__networks.append(network)
         return network
