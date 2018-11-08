@@ -28,6 +28,7 @@ if __name__ == '__main__':
     if action == 'initSwarm':
         master.init_swarm(advertise_addr=utl.get_local_address())
         master.create_network(name='DynamicSwarmNetwork')
+        master.get_join_token()
     elif action == 'joinSwarm':
         if not remote_addr or not join_token:
             print('Remote address and join_token must be specified together.')
