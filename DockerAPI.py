@@ -136,8 +136,7 @@ class SwarmMaster(BaseDocker):
         Get join token of a Swarm cluster
         :return: remote address, join_token
         """
-        assert self.__inited_flag
-        remote_addr, join_token = os.popen('docker swarm join-token worker | grep docker', 'r').read().strip().split()[4:]
+        remote_addr, join_token = os.popen('sudo docker swarm join-token worker | grep docker', 'r').read().strip().split()[4:]
         return remote_addr, join_token
 
     def create_network(self, name, check_duplicate=True, subnet=None):

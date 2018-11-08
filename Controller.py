@@ -2,19 +2,36 @@
 # -*- coding: utf-8 -*-
 
 import utl
+import argparse
+import json
 from DockerAPI import SwarmMaster
+from DockerAPI import SwarmWorker
 
 
-class Controller(object):
-    def __init__(self):
-        self.__swarm_master = SwarmMaster()
+master = SwarmMaster()
+worker = SwarmWorker()
 
-    def setup_cluster(self):
-        # init swarm environment
-        self.__swarm_master.init_swarm(advertise_addr=utl.get_local_address())
 
-        # create network, this step is optional
-        self.__swarm_master.create_network(name='DynamicSwarmNetwork')
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--action', choices=['initSwarm', 'createService'], type=str, help='DynamicDockerSwarm action')
+    parser.add_argument('--service', required=False, type=str, help='Service definition')
+    parser.add_argument('--remote_addr', required=False, type=str, default=None, help='Remote address')
+    parser.add_argument('--join_token', required=False, type=str, default=None, help='Docker Swarm join token.')
 
-    def add_service(self, service_json):
-        self.__swarm_master.create_service(service_info=service_json)
+    args = parser.parse_args()
+    action = args.action
+    serviceInfo = args.service
+    remote_addr = args.remote_addr
+    join_token = args.join_token
+
+    if action == 'initSwarm':
+        master.init_swarm(advertise_addr=utl.get_local_address())
+        master.create_network(name='DynamicSwarmNetwork')
+    elif action == 'joinSwarm':
+        if not remote_addr or not join_token:
+            print('Remote address and join_token must be specified together.')
+        worker.join(remote_addr, join_token)
+    elif action == 'newService':
+        serviceInfo = json.loads(serviceInfo)
+        master.create_service(serviceInfo)
