@@ -1,0 +1,16 @@
+{
+  "image": "ubuntu:latest",
+  "name": "MapReduce",
+  "command": ["/bin/bash"],
+  "endpoint_spec": {
+    "mode": "vip",
+    "ports": "4000:4000"
+  },
+  "mode": {
+    "service_mode": "replicated/global",
+    "replicas": 3
+  },
+  "networks": ["DynamicSwarmNetwork"],
+  "tty": true,
+  "open_stdin": true
+}

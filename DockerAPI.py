@@ -72,7 +72,6 @@ class SwarmMaster(BaseDocker):
             # check input data and swarm environment
             assert type(service_info) is dict
             assert 'image' in service_info
-            assert self.__inited_flag
 
             image = service_info['image']
             if 'command' in service_info:
