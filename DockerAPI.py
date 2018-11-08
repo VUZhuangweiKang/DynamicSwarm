@@ -157,7 +157,7 @@ class SwarmMaster(BaseDocker):
                                                 driver='overlay',
                                                 check_duplicate=check_duplicate,
                                                 ipam=ipam_config)
-        self.logger.info('Created network', network.id)
+        self.logger.info('Created network %s' % network.id)
         self.__networks.append(network)
         return network
 
