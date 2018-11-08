@@ -56,12 +56,8 @@ class SwarmMaster(BaseDocker):
         """
         try:
             result = self.client.swarm.init(advertise_addr=advertise_addr)
-            print('Result', result)
             self.__inited_flag = True
-            if result:
-                self.logger.info('Init Docker Swarm environment.')
-            else:
-                self.logger.error('Something wrong while initializing Docker Swarm environment.')
+            self.logger.info('Init Docker Swarm environment.')
         except Exception as ex:
             self.logger.error(ex)
 
