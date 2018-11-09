@@ -231,6 +231,18 @@ class SwarmMaster(BaseDocker):
             ids.append(node.id)
         self.logger.info(ids)
 
+    def inspect_task_name(self, sv_name):
+        """
+        Get task id and task name
+        :param sv_name:
+        :return:
+        """
+        tasks = os.popen('sudo docker service ps %s | grep Running | awk \'{print $1 " " $2}\'' % sv_name).read().strip().split('\n')
+        result = []
+        for task in tasks:
+            result.append((task.split()[0], task.split()[1]))
+        self.logger.info(str(result))
+
 
 class SwarmWorker(BaseDocker):
     def __init__(self):
