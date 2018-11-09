@@ -216,7 +216,7 @@ class SwarmMaster(BaseDocker):
         #         tasks.append(sv.tasks())
         # self.logger.info(tasks)
         tasks = os.popen('sudo docker service ps %s | grep Running' % sv_name).read()
-        tasks = tasks.split('\n')
+        tasks = tasks.split('\n')[:-1]
         tasks = [task.split()[0] for task in tasks]
         results = []
         for task in tasks:
