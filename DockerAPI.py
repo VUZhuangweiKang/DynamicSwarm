@@ -52,6 +52,11 @@ class BaseDocker(object):
         self.client.swarm.leave(force)
         self.logger.info('Left swarm cluster.')
 
+    def getNodeID(self):
+        id_str = os.popen('docker info | grep NodeID').read()
+        id_str = id_str.split(':')[1].strip()
+        self.logger.info(id_str)
+
 
 class SwarmMaster(BaseDocker):
     def __init__(self):

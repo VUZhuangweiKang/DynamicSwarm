@@ -6,8 +6,9 @@ import argparse
 import json
 from DockerAPI import SwarmMaster
 from DockerAPI import SwarmWorker
+from DockerAPI import BaseDocker
 
-
+base = BaseDocker()
 master = SwarmMaster()
 worker = SwarmWorker()
 
@@ -15,12 +16,11 @@ worker = SwarmWorker()
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--action', choices=['initSwarm', 'newService', 'joinSwarm', 'rmService', 'leaveSwarm',
-                                             'inspectTask', 'inspectTasks', 'listNodes'],
+                                             'inspectTask', 'inspectTasks', 'listNodes', 'getNodeID'],
                         type=str, help='DynamicDockerSwarm action')
     parser.add_argument('--service', required=False, type=str, help='Service definition')
     parser.add_argument('--remote_addr', required=False, type=str, default=None, help='Remote address')
     parser.add_argument('--join_token', required=False, type=str, default=None, help='Docker Swarm join token.')
-    parser.add_argument('--role', required=False, choices=['worker', 'master'], help='Worker/Master')
     parser.add_argument('--task_name', required=False, type=str, help='Specific task name')
 
     args = parser.parse_args()
@@ -45,11 +45,7 @@ if __name__ == '__main__':
         serviceName = serviceInfo
         master.rm_service(serviceName)
     elif action == 'leaveSwarm':
-        role = args.role
-        if role == 'worker':
-            worker.leave()
-        elif role == 'master':
-            master.leave()
+        base.leave()
     elif action == 'inspectTask':
         task = args.task_name
         master.inspect_task(task)
@@ -58,3 +54,5 @@ if __name__ == '__main__':
         master.inspect_tasks(sv_name)
     elif action == 'listNodes':
         master.list_nodes()
+    elif action == 'getNodeID':
+        base.getNodeID()
