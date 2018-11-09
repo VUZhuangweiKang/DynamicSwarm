@@ -237,7 +237,7 @@ class SwarmMaster(BaseDocker):
         :param sv_name:
         :return:
         """
-        tasks = os.popen('sudo docker service ps %s | grep Running | awk \'{print $1 " " $2}\'' % sv_name).read().strip()
+        tasks = os.popen('sudo docker service ps %s | grep Running | awk \'{print $1 " " $2}\'' % sv_name).read().strip().replace('\n', ',')
         self.logger.info(tasks)
 
 
