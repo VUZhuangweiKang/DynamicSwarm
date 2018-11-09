@@ -35,6 +35,8 @@ if __name__ == '__main__':
         worker.join(remote_addr, join_token)
     elif action == 'newService':
         serviceInfo = serviceInfo.strip('\'')
-        print(serviceInfo)
-        serviceInfo = json.loads(serviceInfo)
+        with open('service.json', 'w') as f:
+            f.write(serviceInfo)
+        with open('service.json') as f:
+            serviceInfo = json.load(f)
         master.create_service(serviceInfo)
