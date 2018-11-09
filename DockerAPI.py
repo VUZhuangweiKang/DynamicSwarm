@@ -191,6 +191,18 @@ class SwarmMaster(BaseDocker):
         """
         return self.client.nodes.list(filters={'role': 'manager'})
 
+    def inspect_task(self, name):
+        """
+        Inspect task info
+        :param name: task name
+        :return: a json formatted string
+        """
+        services = self.list_services()
+        for temp in services:
+            if temp.name == name.split('.')[0]:
+                taskInfo = temp.tasks(filters={'name': name})
+                self.logger.info(taskInfo)
+
 
 class SwarmWorker(BaseDocker):
     def __init__(self):
