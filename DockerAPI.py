@@ -85,8 +85,11 @@ class SwarmMaster(BaseDocker):
             # init EndpointSpec obj
             if 'endpoint_spec' in service_info:
                 if 'ports' in service_info['endpoint_spec']:
-                    for key in service_info['endpoint_spec']['ports']:
-                        service_info['endpoint_spec']['ports'][key] = int(service_info['endpoint_spec']['ports'][key])
+                    ports = service_info['endpoint_spec']['ports']
+                    temp = {}
+                    for port in ports:
+                        temp.update({int(port): int(service_info['endpoint_spec']['ports'][port])})
+                    service_info['endpoint_spec']['ports'] = temp
                     service_info['endpoint_spec'] = docker.types.EndpointSpec(
                         mode=service_info['endpoint_spec']['mode'],
                         ports=service_info['endpoint_spec']['ports'])

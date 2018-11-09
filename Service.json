@@ -5,7 +5,9 @@
   "args": ["Arguments to the command"],
   "endpoint_spec": {
     "mode": "vip(default)/dnsrr",
-    "ports": "published_port:target_port"
+    "ports": {
+      "published_port": "target_port(int)"
+    }
   },
   "mode": {
     "service_mode": "replicated/global",
