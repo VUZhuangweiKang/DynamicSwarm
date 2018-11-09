@@ -48,7 +48,7 @@ class BaseDocker(object):
         :param force:
         :return:
         """
-        assert self.client.swarm.leave(force)
+        self.client.swarm.leave(force)
         self.logger.info('Left swarm cluster.')
 
 
