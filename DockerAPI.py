@@ -107,9 +107,8 @@ class SwarmMaster(BaseDocker):
 
             # check port
             if 'endpoint_spec' in service_info and 'ports' in service_info['endpoint_spec']:
-                if type(service_info['endpoint_spec']['port']) is dict:
-                    for key in service_info['endpoint_spec']['port']:
-                        service_info['endpoint_spec']['port'][key] = int(service_info['endpoint_spec']['port'][key])
+                for key in service_info['endpoint_spec']['ports']:
+                    service_info['endpoint_spec']['ports'][key] = int(service_info['endpoint_spec']['ports'][key])
 
             service = self.client.services.create(image=image, command=command, **service_info)
 
