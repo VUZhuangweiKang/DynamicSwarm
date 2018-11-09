@@ -20,15 +20,15 @@ def get_logger(logger_name, log_file):
     fl = logging.FileHandler(log_file)
     fl.setLevel(logging.DEBUG)
 
-    cl = logging.StreamHandler()
-    cl.setLevel(logging.DEBUG)
+    # cl = logging.StreamHandler()
+    # cl.setLevel(logging.DEBUG)
 
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fl.setFormatter(formatter)
-    cl.setFormatter(formatter)
+    # cl.setFormatter(formatter)
 
     logger.addHandler(fl)
-    logger.addHandler(cl)
+    # logger.addHandler(cl)
 
     return logger
 
