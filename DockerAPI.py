@@ -125,12 +125,16 @@ class SwarmMaster(BaseDocker):
             self.logger.error(ex)
             traceback.print_exc()
 
-    def rm_service(self, service_id):
-        assert type(service_id) is str
+    def rm_service(self, service_name=None, service_id=None):
         try:
-            for s in self.list_services():
-                if s.id == service_id:
-                    s.remove()
+            if service_id:
+                for s in self.list_services():
+                    if s.id == service_id:
+                        s.remove()
+            elif service_name:
+                for s in self.list_services():
+                    if s.name == service_name:
+                        s.remove()
         except Exception as ex:
             self.logger.error(ex)
 

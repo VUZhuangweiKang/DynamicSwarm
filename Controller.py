@@ -14,7 +14,7 @@ worker = SwarmWorker()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--action', choices=['initSwarm', 'newService', 'joinSwarm'], type=str, help='DynamicDockerSwarm action')
+    parser.add_argument('--action', choices=['initSwarm', 'newService', 'joinSwarm', 'rmService'], type=str, help='DynamicDockerSwarm action')
     parser.add_argument('--service', required=False, type=str, help='Service definition')
     parser.add_argument('--remote_addr', required=False, type=str, default=None, help='Remote address')
     parser.add_argument('--join_token', required=False, type=str, default=None, help='Docker Swarm join token.')
@@ -37,3 +37,6 @@ if __name__ == '__main__':
         serviceInfo = serviceInfo.strip('\'')
         serviceInfo = json.loads(serviceInfo)
         master.create_service(serviceInfo)
+    elif action == 'rmService':
+        serviceName = serviceInfo
+        master.rm_service(serviceName)
