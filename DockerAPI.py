@@ -3,6 +3,7 @@
 
 import os
 import docker
+import traceback
 import utl
 
 
@@ -111,6 +112,7 @@ class SwarmMaster(BaseDocker):
             return service
         except Exception as ex:
             self.logger.error(ex)
+            traceback.print_exc()
 
     def rm_service(self, service_id):
         assert type(service_id) is str
