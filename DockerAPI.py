@@ -84,6 +84,8 @@ class SwarmMaster(BaseDocker):
 
             # init EndpointSpec obj
             if 'endpoint_spec' in service_info:
+                for key in service_info['endpoint_spec']['ports']:
+                    service_info['endpoint_spec']['ports'][key] = int(service_info['endpoint_spec']['ports'][key])
                 service_info['endpoint_spec'] = docker.types.EndpointSpec(mode=service_info['endpoint_spec']['mode'],
                                                                           ports=service_info['endpoint_spec']['ports'])
 
@@ -104,11 +106,6 @@ class SwarmMaster(BaseDocker):
                 if 'cpu_limit' in service_info['resources']:
                     cpu_limit = service_info['resources']['cpu_limit']
                 service_info['resources'] = docker.types.Resources(cpu_limit=cpu_limit, mem_limit=mem_limit)
-
-            # check port
-            if 'endpoint_spec' in service_info and 'ports' in service_info['endpoint_spec']:
-                for key in service_info['endpoint_spec']['ports']:
-                    service_info['endpoint_spec']['ports'][key] = int(service_info['endpoint_spec']['ports'][key])
 
             service = self.client.services.create(image=image, command=command, **service_info)
 
