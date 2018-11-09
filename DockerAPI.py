@@ -106,7 +106,7 @@ class SwarmMaster(BaseDocker):
                 service_info['resources'] = docker.types.Resources(cpu_limit=cpu_limit, mem_limit=mem_limit)
             service = self.client.services.create(image=image, command=command, **service_info)
 
-            self.logger.info('Created service:', service.id)
+            self.logger.info('Created service: %s' % service.id)
 
             return service
         except Exception as ex:
