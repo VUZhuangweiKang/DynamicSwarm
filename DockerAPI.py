@@ -209,12 +209,19 @@ class SwarmMaster(BaseDocker):
         :param sv_name: service name
         :return:
         """
-        services = self.list_services()
-        tasks = []
-        for sv in services:
-            if sv.name == sv_name:
-                tasks.append(sv.tasks())
-        self.logger.info(tasks)
+        # services = self.list_services()
+        # tasks = []
+        # for sv in services:
+        #     if sv.name == sv_name:
+        #         tasks.append(sv.tasks())
+        # self.logger.info(tasks)
+        tasks = os.popen('sudo docker service ps %s | grep Running' % sv_name).read()
+        tasks = tasks.split('\n')
+        tasks = [task.split()[0] for task in tasks]
+        results = []
+        for task in tasks:
+            results.append(os.popen('sudo docker inspect %s' % task).read())
+        self.logger.info(results)
 
 
 class SwarmWorker(BaseDocker):
