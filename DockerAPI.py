@@ -104,7 +104,7 @@ class SwarmMaster(BaseDocker):
                     cpu_limit = service_info['resources']['cpu_limit']
                 service_info['resources'] = docker.types.Resources(cpu_limit=cpu_limit, mem_limit=mem_limit)
 
-            service = self.client.services.create(image, command, service_info)
+            service = self.client.services.create(image=image, command=command, **service_info)
 
             self.logger.info('Created service:', service.id)
 
