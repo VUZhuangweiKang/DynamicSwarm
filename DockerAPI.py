@@ -127,8 +127,7 @@ class SwarmMaster(BaseDocker):
                 service_info['resources'] = docker.types.Resources(cpu_limit=cpu_limit, mem_limit=mem_limit)
 
             service = self.client.services.create(image=image, command=command, **service_info)
-
-            self.logger.info('Created service: %s' % service.id)
+            self.logger.info('%s' % service.id)
 
             return service
         except Exception as ex:
@@ -215,6 +214,17 @@ class SwarmMaster(BaseDocker):
             if sv.name == sv_name:
                 self.logger.info(sv.tasks())
                 return
+
+    def list_nodes(self):
+        """
+        Get nodes id list
+        :return:
+        """
+        nodes = self.client.nodes.list()
+        ids = []
+        for node in nodes:
+            ids.append(node.id)
+        self.logger.info(ids)
 
 
 class SwarmWorker(BaseDocker):
