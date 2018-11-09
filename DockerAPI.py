@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import json
 import docker
 import traceback
 import utl
@@ -220,7 +221,9 @@ class SwarmMaster(BaseDocker):
         tasks = [task.split()[0] for task in tasks]
         results = []
         for task in tasks:
-            results.append(os.popen('sudo docker inspect %s' % task).read())
+            info = os.popen('sudo docker inspect %s' % task).read()
+            info = json.dumps(json.loads(info)[0])
+            results.append(info)
         self.logger.info(results)
 
 
