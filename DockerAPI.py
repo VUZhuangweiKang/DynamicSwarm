@@ -210,10 +210,11 @@ class SwarmMaster(BaseDocker):
         :return:
         """
         services = self.list_services()
+        tasks = []
         for sv in services:
             if sv.name == sv_name:
-                tasks = sv.tasks()
-                self.logger.info(tasks)
+                tasks.append(sv.tasks())
+        self.logger.info(tasks)
 
 
 class SwarmWorker(BaseDocker):
