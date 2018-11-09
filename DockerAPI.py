@@ -203,6 +203,18 @@ class SwarmMaster(BaseDocker):
                 taskInfo = temp.tasks(filters={'name': name})
                 self.logger.info(taskInfo)
 
+    def inspect_tasks(self, sv_name):
+        """
+        Inspect all tasks of a specific service
+        :param sv_name: service name
+        :return:
+        """
+        services = self.list_services()
+        for sv in services:
+            if sv.name == sv_name:
+                tasks = sv.tasks()
+                self.logger.info(tasks)
+
 
 class SwarmWorker(BaseDocker):
     def __init__(self):

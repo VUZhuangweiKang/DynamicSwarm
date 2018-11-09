@@ -14,7 +14,8 @@ worker = SwarmWorker()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--action', choices=['initSwarm', 'newService', 'joinSwarm', 'rmService', 'leaveSwarm', 'inspectTask'],
+    parser.add_argument('--action', choices=['initSwarm', 'newService', 'joinSwarm', 'rmService', 'leaveSwarm',
+                                             'inspectTask', 'inspectTasks'],
                         type=str, help='DynamicDockerSwarm action')
     parser.add_argument('--service', required=False, type=str, help='Service definition')
     parser.add_argument('--remote_addr', required=False, type=str, default=None, help='Remote address')
@@ -52,3 +53,6 @@ if __name__ == '__main__':
     elif action == 'inspectTask':
         task = args.task_name
         master.inspect_task(task)
+    elif action == 'inspectTasks':
+        sv_name = serviceInfo
+        master.inspect_tasks(sv_name)
