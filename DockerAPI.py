@@ -237,11 +237,8 @@ class SwarmMaster(BaseDocker):
         :param sv_name:
         :return:
         """
-        tasks = os.popen('sudo docker service ps %s | grep Running | awk \'{print $1 " " $2}\'' % sv_name).read().strip().split('\n')
-        result = []
-        for task in tasks:
-            result.append((task.split()[0], task.split()[1]))
-        self.logger.info(str(result))
+        tasks = os.popen('sudo docker service ps %s | grep Running | awk \'{print $1 " " $2}\'' % sv_name).read().strip()
+        self.logger.info(tasks)
 
 
 class SwarmWorker(BaseDocker):
