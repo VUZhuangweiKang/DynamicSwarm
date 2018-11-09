@@ -4,7 +4,7 @@
   "command": ["/bin/bash"],
   "endpoint_spec": {
     "mode": "vip",
-    "ports": {"4000/tcp": 4000}
+    "ports": {"4000": 4000}
   },
   "mode": {
     "service_mode": "replicated",

@@ -84,16 +84,22 @@ class SwarmMaster(BaseDocker):
 
             # init EndpointSpec obj
             if 'endpoint_spec' in service_info:
-                for key in service_info['endpoint_spec']['ports']:
-                    service_info['endpoint_spec']['ports'][key] = int(service_info['endpoint_spec']['ports'][key])
-                service_info['endpoint_spec'] = docker.types.EndpointSpec(mode=service_info['endpoint_spec']['mode'],
-                                                                          ports=service_info['endpoint_spec']['ports'])
-
+                if 'ports' in service_info['endpoint_spec']:
+                    for key in service_info['endpoint_spec']['ports']:
+                        service_info['endpoint_spec']['ports'][key] = int(service_info['endpoint_spec']['ports'][key])
+                    service_info['endpoint_spec'] = docker.types.EndpointSpec(
+                        mode=service_info['endpoint_spec']['mode'],
+                        ports=service_info['endpoint_spec']['ports'])
+                else:
+                    service_info['endpoint_spec'] = docker.types.EndpointSpec(
+                        mode=service_info['endpoint_spec']['mode'])
+            print(type(service_info['endpoint_spec']['ports']['4000']))
             # init ServiceMode obj
             if 'service_mode' in service_info:
                 if service_info['service_mode']['mode'] == 'replicated':
-                    service_info['service_mode'] = docker.types.ServiceMode(mode='replicated',
-                                                                            replicas=service_info['service_mode']['replicas'])
+                    service_info['service_mode'] = docker.types.ServiceMode(
+                        mode='replicated',
+                        replicas=service_info['service_mode']['replicas'])
                 else:
                     service_info['service_mode'] = docker.types.ServiceMode(mode='global')
 
