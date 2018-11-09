@@ -42,6 +42,15 @@ class BaseDocker(object):
         except Exception as ex:
             self.logger.error(ex)
 
+    def leave(self, force=True):
+        """
+        Leave a Swarm cluster
+        :param force:
+        :return:
+        """
+        assert self.client.swarm.leave(force)
+        self.logger.info('Left swarm cluster.')
+
 
 class SwarmMaster(BaseDocker):
     def __init__(self):
@@ -199,12 +208,3 @@ class SwarmWorker(BaseDocker):
         assert self.client.swarm.join(remote_addrs=[remote_addr], join_token=join_token)
         self.__joined_flag = True
         self.logger.info('Joined cluster as a worker node.')
-
-    def leave(self, force=True):
-        """
-        Leave a Swarm cluster
-        :param force:
-        :return:
-        """
-        assert self.client.swarm.leave(force)
-        self.logger.info('Left swarm cluster.')
