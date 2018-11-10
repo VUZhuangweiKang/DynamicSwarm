@@ -1,0 +1,18 @@
+{
+  "image": "ubuntu:latest",
+  "name": "Map2",
+  "command": ["python3 map.py -a 100.26.185.66 -t light/ingress/2"],
+  "endpoint_spec": {
+    "mode": "vip",
+    "ports": {
+      "4002": 4002
+    }
+  },
+  "mode": {
+    "service_mode": "replicated",
+    "replicas": 3
+  },
+  "networks": ["DynamicSwarmNetwork"],
+  "tty": true,
+  "open_stdin": true
+}

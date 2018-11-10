@@ -1,0 +1,18 @@
+{
+  "image": "zhuangweikang/mic_final_project:map",
+  "name": "Map1",
+  "command": ["python3 map.py -a 100.26.185.66 -t light/ingress/1"],
+  "endpoint_spec": {
+    "mode": "vip",
+    "ports": {
+      "4001": 4001
+    }
+  },
+  "mode": {
+    "service_mode": "replicated",
+    "replicas": 3
+  },
+  "networks": ["DynamicSwarmNetwork"],
+  "tty": true,
+  "open_stdin": true
+}

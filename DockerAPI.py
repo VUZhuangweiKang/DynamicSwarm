@@ -92,6 +92,9 @@ class SwarmMaster(BaseDocker):
             image = service_info['image']
             if 'command' in service_info:
                 command = service_info['command']
+                if type(command) is list:
+                    for i, cmd in enumerate(command):
+                        command[i] = ' '.join([com.replace('\n', '').replace('\\', '') for com in cmd.split()])
                 del service_info['command']
             else:
                 command = None

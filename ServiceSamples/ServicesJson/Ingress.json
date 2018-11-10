@@ -1,7 +1,7 @@
 {
-  "image": "ubuntu:latest",
-  "name": "MapReduce",
-  "command": ["/bin/bash"],
+  "image": "zhuangweikang/mic_final_project:ingress",
+  "name": "Ingress",
+  "command": ["python3 ingress.py -a 100.26.185.66 -t light"],
   "endpoint_spec": {
     "mode": "vip",
     "ports": {
@@ -10,7 +10,7 @@
   },
   "mode": {
     "service_mode": "replicated",
-    "replicas": 3
+    "replicas": 1
   },
   "networks": ["DynamicSwarmNetwork"],
   "tty": true,
